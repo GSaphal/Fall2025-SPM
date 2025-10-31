@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "UberMoveText";
+  src: url("/fonts/UberMoveTextRegular.otf") format("opentype");
+  font-weight: 400; /* Regular */
+  font-style: normal;
+}
+@font-face {
+  font-family: "UberMoveText";
+  src: url("/fonts/UberMoveTextMedium.otf") format("opentype");
+  font-weight: 500; /* Medium */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "UberMoveText";
+  src: url("/fonts/UberMoveTextLight.otf") format("opentype");
+  font-weight: 300; /* Light */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "UberMoveText";
+  src: url("/fonts/UberMoveTextBold.otf") format("opentype");
+  font-weight: 700; /* Bold */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "UberMove";
+  src: url("/fonts/UberMoveMedium.otf") format("opentype");
+  font-weight: 500; /* Medium */
+  font-style: normal;
+}
+
+.specialDiv {
+  box-shadow: 8px 14px 55px rgba(96, 165, 225, 0.35);
+  transition-duration: 200ms;
+}
+.Root {
+  isolation: isolate;
+}
+* {
+  font-family: "UberMoveText";
+}
+
+.Root {
+  isolation: isolate;
+}
+
+body {
+  font-family: "UberMoveText";
+}
+
+::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+  height: "0px";
+  background: transparent;
+}
+
+.my-shadow{
+  box-shadow: '0px 4px 4px rgba(0, 0, 0, 0.25)';
+}
