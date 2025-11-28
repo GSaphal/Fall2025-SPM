@@ -1,4 +1,4 @@
-# Monetrix Application
+# Moneytrix Application
 
 This application is designed to extract and process information from receipts and flyers using Optical Character Recognition (OCR) and structured data generation with OpenAI's GPT models. It can extract product details, prices, discounts, and other relevant information from images of receipts and flyers, and store the structured data for further use.
 
