@@ -180,12 +180,6 @@ const Dashboard = () => {
         <BudgetBreakdown />
       </div>
       
-      {/* AI Recommendations */}
-      <AIRecommendations />
-      
-      {/* Savings Goals */}
-      <SavingsGoals />
-      
       <div className="mt-6 mb-4">
         <HeadingSmall className="text-gray-800 font-semibold mb-4">Today</HeadingSmall>
         <div className="space-y-3">

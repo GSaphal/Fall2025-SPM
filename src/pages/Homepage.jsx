@@ -87,12 +87,11 @@ export default function Homepage() {
     <div className="min-h-screen flex items-center justify-center p-4">
       <main className="bg-white rounded-2xl shadow-lg max-w-sm w-full overflow-hidden">
         <div className="p-8 text-center">
-          <h1 className="font-semibold text-4xl mb-4">
-            Mone<span className="text-green-400">trix</span>
+          <h1 className="font-semibold text-4xl mb-4 text-gray-800">
+            Moneytrix
           </h1>
           <p className="text-gray-600 text-lg mb-8">
-            Save Money, Make
-            <span className="text-green-400"> Money</span>.
+            Save Money, Make Money.
           </p>
 
           {/* Google Login Button */}
