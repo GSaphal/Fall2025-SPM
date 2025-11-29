@@ -1,20 +1,6 @@
 /**
  * Wallet utility functions for frontend
  */
-import { ethers } from 'ethers';
-
-/**
- * Create a wallet using ethers.js (client-side)
- * Note: This creates a wallet in the browser. For production, 
- * wallets should be created server-side and encrypted.
- */
-export const createWalletClientSide = () => {
-  const wallet = ethers.Wallet.createRandom();
-  return {
-    address: wallet.address,
-    privateKey: wallet.privateKey // In production, never expose this
-  };
-};
 
 /**
  * Format wallet address for display (show first 6 and last 4 characters)
