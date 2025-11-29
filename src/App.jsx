@@ -6,7 +6,7 @@ import Homepage from "./pages/Homepage";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile.jsx";
 import Camera from "./pages/Camera";
-import Preferences from "./pages/Preferences";
+import Preferences from "./pages/preferences";
 import Analytics from "./pages/Analytics";
 import Random from "./pages/Random.jsx";
 import FlyerSearch from "./components/FlyerProcess";
