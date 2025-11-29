@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   HeadingLarge,
   HeadingMedium,
@@ -26,8 +26,29 @@ import ListComponent from "../components/List";
 import CircularProgress from "../components/CircularProgress";
 import BudgetBreakdown from "../components/Budget";
 import { Link, useLocation } from "react-router-dom";
+import { getUserRewards } from "../services/walletService";
 
 const Dashboard = () => {
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
+  const userEmail = user?.email;
+  const [rewardsPoints, setRewardsPoints] = useState(0);
+
+  useEffect(() => {
+    const fetchRewards = async () => {
+      if (userEmail) {
+        try {
+          const data = await getUserRewards(userEmail);
+          setRewardsPoints(data.rewards_points || 0);
+        } catch (error) {
+          console.error("Error fetching rewards:", error);
+          // Use demo data if backend fails
+          setRewardsPoints(1250);
+        }
+      }
+    };
+    fetchRewards();
+  }, [userEmail]);
+
   return (
     <div className="container w-full h-full max-w-sm mx-auto">
       <div className="flex flex-col ">
@@ -99,8 +120,8 @@ const Dashboard = () => {
               Accumulated Points
             </ParagraphSmall>
           </div>
-          <ParagraphSmall className="text-gray-700 font-bold!">
-            100 Points
+          <ParagraphSmall className="text-gray-700 font-bold">
+            {rewardsPoints || 0} Points
           </ParagraphSmall>
         </div>
         <div className="mt-2">

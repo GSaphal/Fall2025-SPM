@@ -51,6 +51,7 @@ import { HeadingMedium, HeadingSmall } from "baseui/typography";
 // @ts-ignore
 import { MdMoney, MdPower, MdStorm } from "react-icons/md";
 import { Logout } from "../components/Logout";
+import Wallet from "../components/Wallet";
 
 // Register Chart.js components
 ChartJS.register(
@@ -171,6 +172,10 @@ function ProfilePage() {
           </div>
         </Tab>
       </Tabs>
+      
+      {/* Wallet Section */}
+      {userObj?.email && <Wallet userEmail={userObj.email} />}
+      
       <Logout />
     </div>
   );

@@ -11,6 +11,8 @@ class User(db.Model):
     email = db.Column(db.String(100), nullable=False, unique=True)
     password = db.Column(db.String(100), nullable=False)
     role = db.Column(db.String(100), nullable=False)
+    wallet_address = db.Column(db.String(100), nullable=True)
+    rewards_points = db.Column(db.Integer, default=0)
     # products = db.relationship('Product', backref='owner', lazy=True)
 
     def __repr__(self):

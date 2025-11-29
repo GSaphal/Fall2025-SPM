@@ -25,9 +25,19 @@ export default function Homepage() {
         );
       }
       signInWithEmailLink(auth, storedEmail, window.location.href)
-        .then((result) => {
+        .then(async (result) => {
           window.localStorage.removeItem("emailForSignIn");
           localStorage.setItem("user", JSON.stringify(result.user));
+          
+          // Create wallet for user
+          try {
+            const { createOrGetWallet } = await import("../services/walletService");
+            await createOrGetWallet(result.user.email);
+          } catch (error) {
+            console.error("Wallet creation error:", error);
+            // Continue even if wallet creation fails
+          }
+          
           toast.success("Logged in successfully");
           navigate("/dashboard");
         })
@@ -40,6 +50,16 @@ export default function Homepage() {
     try {
       const result = await signInWithPopup(auth, googleProvider);
       localStorage.setItem("user", JSON.stringify(result.user));
+      
+      // Create wallet for user
+      try {
+        const { createOrGetWallet } = await import("../services/walletService");
+        await createOrGetWallet(result.user.email);
+      } catch (error) {
+        console.error("Wallet creation error:", error);
+        // Continue even if wallet creation fails
+      }
+      
       toast.success("Logged in successfully");
       navigate("/dashboard");
     } catch (error) {

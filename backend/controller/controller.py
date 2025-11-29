@@ -6,6 +6,7 @@ from werkzeug.utils import secure_filename
 from image_processing.ocr import extract_text_from_images
 from image_processing.receipt_processor import structured_output
 from model.model import User, db, Product, Store, UserExpenditure
+from utils.wallet import create_wallet
 
 # User controller
 user_controller = Blueprint('user_controller', __name__)
@@ -27,7 +28,83 @@ def get_users():
 @user_controller.route('/users/<string:email>', methods=['GET'])
 def get_user(email):
     user = User.query.filter_by(email=email).first()
-    return jsonify({'username': user.username, 'email': user.email, 'role': user.role})
+    if not user:
+        return jsonify({'error': 'User not found'}), 404
+    return jsonify({
+        'username': user.username, 
+        'email': user.email, 
+        'role': user.role,
+        'wallet_address': user.wallet_address,
+        'rewards_points': user.rewards_points
+    })
+
+@user_controller.route('/users/wallet', methods=['POST'])
+def create_or_get_wallet():
+    """
+    Create or retrieve wallet for a user by email
+    """
+    data = request.get_json()
+    email = data.get('email')
+    
+    if not email:
+        return jsonify({'error': 'Email is required'}), 400
+    
+    # Find or create user
+    user = User.query.filter_by(email=email).first()
+    
+    if not user:
+        # Create new user if doesn't exist (for Firebase auth users)
+        user = User(
+            username=email.split('@')[0],
+            email=email,
+            password='',  # Firebase handles auth
+            role='user',
+            wallet_address=None,
+            rewards_points=0
+        )
+        db.session.add(user)
+    
+    # Create wallet if user doesn't have one
+    if not user.wallet_address:
+        wallet = create_wallet()
+        user.wallet_address = wallet['address']
+        # In production, encrypt and store private_key securely
+        db.session.commit()
+    
+    return jsonify({
+        'wallet_address': user.wallet_address,
+        'rewards_points': user.rewards_points,
+        'email': user.email
+    }), 200
+
+@user_controller.route('/users/<string:email>/rewards', methods=['GET'])
+def get_rewards(email):
+    """Get user rewards points"""
+    user = User.query.filter_by(email=email).first()
+    if not user:
+        return jsonify({'error': 'User not found'}), 404
+    return jsonify({
+        'rewards_points': user.rewards_points,
+        'wallet_address': user.wallet_address
+    }), 200
+
+@user_controller.route('/users/<string:email>/rewards', methods=['POST'])
+def update_rewards(email):
+    """Update user rewards points"""
+    data = request.get_json()
+    points = data.get('points', 0)
+    
+    user = User.query.filter_by(email=email).first()
+    if not user:
+        return jsonify({'error': 'User not found'}), 404
+    
+    user.rewards_points = user.rewards_points + points if user.rewards_points else points
+    db.session.commit()
+    
+    return jsonify({
+        'rewards_points': user.rewards_points,
+        'message': 'Rewards updated successfully'
+    }), 200
 
 # User expenditure controller
 user_expenditure_controller = Blueprint('user_expenditure_controller', __name__)
