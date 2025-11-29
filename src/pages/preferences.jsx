@@ -10,6 +10,10 @@ import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
+import SavingsGoals from "../components/SavingsGoals";
+import AIRecommendations from "../components/AIRecommendations";
+import FinancialLiteracy from "../components/FinancialLiteracy";
+import { HeadingMedium } from "baseui/typography";
 
 function Preferences() {
   const [preferences, setPreferences] = useState([]);
@@ -95,22 +99,42 @@ function Preferences() {
   );
 
   return (
-    <div className="flex flex-col min-h-screen p-4 items-center w-full max-w-xs mx-auto">
-      <h1 className="text-4xl font-bold mb-4 text-center text-green-400">
-        Preferences
-      </h1>
-      <div className="w-full">
-        {sortedDates.map((date) => (
-          <div key={date} className="mb-6">
-            <h2 className="text-xl font-semibold mb-2 text-green-400">
-              {dayjs(date).format("MMMM D, YYYY")}
-            </h2>
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              className="bg-gray-100 p-3 rounded-lg mb-2 shadow-md border-l-4 border-green-400 gap-4"
-            >
+    <div className="flex flex-col min-h-screen p-4 items-center w-full max-w-sm mx-auto pb-24">
+      {/* Savings Goals Section */}
+      <div className="w-full mb-6">
+        <SavingsGoals />
+      </div>
+      
+      {/* AI Recommendations Section */}
+      <div className="w-full mb-6">
+        <AIRecommendations />
+      </div>
+      
+      {/* Financial Literacy Section */}
+      <div className="w-full mb-6">
+        <FinancialLiteracy />
+      </div>
+      
+      {/* User Preferences Section */}
+      <div className="w-full mb-6">
+        <HeadingMedium className="text-gray-800 font-semibold mb-4">My Preferences</HeadingMedium>
+        {sortedDates.length === 0 ? (
+          <div className="bg-gray-50 rounded-xl p-6 text-center border border-gray-200">
+            <p className="text-gray-500 text-sm">No preferences added yet. Tap the button below to add one!</p>
+          </div>
+        ) : (
+          <div className="w-full">
+            {sortedDates.map((date) => (
+              <div key={date} className="mb-4">
+                <h2 className="text-lg font-semibold mb-2 text-gray-700">
+                  {dayjs(date).format("MMMM D, YYYY")}
+                </h2>
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="bg-white p-4 rounded-xl mb-2 shadow-sm border border-gray-200 gap-4"
+                >
               <div className="gap-4 flex flex-col">
                 {groupedPreferences[date].map((item) => (
                   <div
@@ -136,12 +160,14 @@ function Preferences() {
                     </div>
                   </div>
                 ))}
-              </div>
-            </motion.div>
+                </div>
+              </motion.div>
+            </div>
+          ))}
           </div>
-        ))}
+        )}
       </div>
-      <div className="fixed bottom-0 w-full flex justify-center">
+      <div className="fixed bottom-4 left-0 right-0 flex justify-center max-w-sm mx-auto px-4">
         <Button
           onClick={() => {
             // Reset editing state when adding a new preference
@@ -151,7 +177,7 @@ function Preferences() {
           }}
           shape={SHAPE.pill}
           size={SIZE.large}
-          className="bg-green-400 text-white w-70 relative bottom-25"
+          className="bg-gray-800 hover:bg-gray-700 text-white font-semibold w-full shadow-sm"
         >
           Add a New Preference
         </Button>

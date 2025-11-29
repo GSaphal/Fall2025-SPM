@@ -12,9 +12,22 @@ const Footer = () => {
   console.log(pathname);
 
   return (
-    <div className="flex justify-center fixed bottom-2 w-full">
-      <div className="bg-slate-50 rounded-3xl flex justify-center items-center shadow-lg my-shadow">
-        <Link to="/dashboard">
+    <div className="flex justify-center fixed bottom-2 w-full border-0" style={{ border: 'none' }}>
+      <div 
+        className="bg-slate-50 rounded-3xl flex justify-center items-center border-0 outline-none border-t-0" 
+        style={{ 
+          boxShadow: 'none',
+          border: 'none',
+          borderTop: 'none',
+          borderBottom: 'none',
+          borderLeft: 'none',
+          borderRight: 'none',
+          outline: 'none',
+          borderWidth: '0px',
+          borderStyle: 'none'
+        }}
+      >
+        <Link to="/dashboard" className="no-underline">
           <div className="flex">
             <Button
               shape={SHAPE.pill}
@@ -24,20 +37,26 @@ const Footer = () => {
                   style: ({ $theme }) => ({
                     outline: "none !important",
                     backgroundColor: "transparent",
+                    ":hover": {
+                      backgroundColor: "transparent",
+                    },
+                    ":active": {
+                      backgroundColor: "transparent",
+                    },
                   }),
                 },
               }}
             >
               <MdOutlineDashboard
                 className={
-                  pathname === "/dashboard" ? "text-green-400" : "text-black"
+                  pathname === "/dashboard" ? "text-gray-800" : "text-gray-500"
                 }
                 size={30}
               />
             </Button>
           </div>
         </Link>
-        <Link to="/preferences">
+        <Link to="/preferences" className="no-underline">
           <Button
             shape={SHAPE.pill}
             size={SIZE.large}
@@ -46,19 +65,25 @@ const Footer = () => {
                 style: ({ $theme }) => ({
                   outline: "none !important",
                   backgroundColor: "transparent",
+                  ":hover": {
+                    backgroundColor: "transparent",
+                  },
+                  ":active": {
+                    backgroundColor: "transparent",
+                  },
                 }),
               },
             }}
           >
             <FaHeart
               className={
-                pathname === "/preferences" ? "text-green-400" : "text-black"
+                pathname === "/preferences" ? "text-gray-800" : "text-gray-500"
               }
               size={30}
             />
           </Button>
         </Link>
-        <Link to="/camera">
+        <Link to="/camera" className="no-underline">
           <Button
             shape={SHAPE.pill}
             size={SIZE.large}
@@ -67,14 +92,20 @@ const Footer = () => {
                 style: ({ $theme }) => ({
                   outline: "none !important",
                   backgroundColor: "transparent",
+                  ":hover": {
+                    backgroundColor: "transparent",
+                  },
+                  ":active": {
+                    backgroundColor: "transparent",
+                  },
                 }),
               },
             }}
           >
-            <MdOutlineDocumentScanner className="text-black" size={30} />
+            <MdOutlineDocumentScanner className={pathname === "/camera" ? "text-gray-800" : "text-gray-500"} size={30} />
           </Button>
         </Link>
-        <Link to="/analytics">
+        <Link to="/analytics" className="no-underline">
           <Button
             shape={SHAPE.pill}
             size={SIZE.large}
@@ -83,20 +114,26 @@ const Footer = () => {
                 style: ({ $theme }) => ({
                   outline: "none",
                   backgroundColor: "transparent",
+                  ":hover": {
+                    backgroundColor: "transparent",
+                  },
+                  ":active": {
+                    backgroundColor: "transparent",
+                  },
                 }),
               },
             }}
           >
             <IoMdAnalytics
               className={
-                pathname === "/analytics" ? "text-green-400" : "text-black"
+                pathname === "/analytics" ? "text-gray-800" : "text-gray-500"
               }
               size={30}
             />
           </Button>
         </Link>
 
-        <Link to="/profile">
+        <Link to="/profile" className="no-underline">
           <Button
             shape={SHAPE.pill}
             size={SIZE.large}
@@ -105,13 +142,19 @@ const Footer = () => {
                 style: ({ $theme }) => ({
                   outline: "none !important",
                   backgroundColor: "transparent",
+                  ":hover": {
+                    backgroundColor: "transparent",
+                  },
+                  ":active": {
+                    backgroundColor: "transparent",
+                  },
                 }),
               },
             }}
           >
             <CgProfile
               className={
-                pathname === "/profile" ? "text-green-400" : "text-black"
+                pathname === "/profile" ? "text-gray-800" : "text-gray-500"
               }
               size={30}
             />

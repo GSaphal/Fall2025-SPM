@@ -60,7 +60,7 @@ const Dashboard = () => {
           <HiOutlineRectangleStack className="text-gray-500" size={18} />
           <ParagraphSmall className="text-gray-600">You've spent</ParagraphSmall>
         </div>
-        <HeadingXXLarge className="text-gray-900 font-bold mb-3">$693987</HeadingXXLarge>
+        <HeadingXXLarge className="text-gray-900 font-bold mb-3">$2,450</HeadingXXLarge>
         <div className="w-full">
           <div className="bg-gray-100 rounded-lg px-3 py-2">
             <p className="text-sm text-gray-700 font-medium">
