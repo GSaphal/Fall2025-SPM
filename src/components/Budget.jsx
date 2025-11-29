@@ -10,19 +10,36 @@ const BudgetBreakdown = () => {
   ];
 
   return (
-    <div className="bg-white p-4 rounded-2xl shadow-md">
-      <div className="space-y-4">
+    <div className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+      <div className="space-y-5">
         {categories.map((category, index) => {
           const percentage = (category.amount / category.limit) * 100;
           return (
-            <div key={index}>
-              <div className="flex justify-between text-sm font-medium">
-                <span>{category.name}</span>
-                <span>
-                  ${category.amount} / ${category.limit}
-                </span>
+            <div key={index} className="flex items-center gap-4">
+              {/* Category Name */}
+              <div className="w-24">
+                <h4 className="text-sm font-semibold text-gray-900">
+                  {category.name}
+                </h4>
               </div>
-              <CircularProgress percentage={percentage} />
+              
+              {/* Circular Progress */}
+              <div className="flex-shrink-0">
+                <CircularProgress 
+                  percentage={percentage} 
+                  size={80}
+                  strokeWidth={6}
+                  strokeColor="#4ade80"
+                  trackColor="#e5e7eb"
+                />
+              </div>
+              
+              {/* Budget Amount */}
+              <div className="flex-1 text-right">
+                <p className="text-sm font-medium text-gray-700">
+                  ${category.amount} / ${category.limit}
+                </p>
+              </div>
             </div>
           );
         })}

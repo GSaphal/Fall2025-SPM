@@ -88,11 +88,11 @@ export default function Homepage() {
       <main className="bg-white rounded-2xl shadow-lg max-w-sm w-full overflow-hidden">
         <div className="p-8 text-center">
           <h1 className="font-semibold text-4xl mb-4">
-            Mone<span className="text-green-500">trix</span>
+            Mone<span className="text-green-400">trix</span>
           </h1>
           <p className="text-gray-600 text-lg mb-8">
             Save Money, Make
-            <span className="text-green-500"> Money</span>.
+            <span className="text-green-400"> Money</span>.
           </p>
 
           {/* Google Login Button */}
@@ -122,7 +122,7 @@ export default function Homepage() {
               placeholder="name@email.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
               required
             />
 

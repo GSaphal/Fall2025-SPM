@@ -52,6 +52,8 @@ import { HeadingMedium, HeadingSmall } from "baseui/typography";
 import { MdMoney, MdPower, MdStorm } from "react-icons/md";
 import { Logout } from "../components/Logout";
 import Wallet from "../components/Wallet";
+import GamificationBadges from "../components/GamificationBadges";
+import FinancialLiteracy from "../components/FinancialLiteracy";
 
 // Register Chart.js components
 ChartJS.register(
@@ -172,6 +174,12 @@ function ProfilePage() {
           </div>
         </Tab>
       </Tabs>
+      
+      {/* Gamification Badges */}
+      <GamificationBadges />
+      
+      {/* Financial Literacy */}
+      <FinancialLiteracy />
       
       {/* Wallet Section */}
       {userObj?.email && <Wallet userEmail={userObj.email} />}

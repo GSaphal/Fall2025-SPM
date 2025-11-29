@@ -51,7 +51,7 @@ const SpendingChart = () => {
       const ctx = chart.ctx;
       chart.data.datasets[0].backgroundColor = generateGradient(
         ctx,
-        "rgba(34, 197, 94,"
+        "rgba(74, 222, 128,"
       );
       chart.update();
     }
@@ -65,13 +65,16 @@ const SpendingChart = () => {
         data: [
           1200, 900, 1400, 1100, 1500, 1300, 1700, 1600, 1400, 1500, 1800, 1900,
         ],
-        borderColor: "#22c55e", // Tailwind green-400
-        tension: 0.5, // Smooth curve
-        pointBorderColor: "#fff",
-        pointBackgroundColor: "#22c55e",
+        borderColor: "#4ade80", // Light green
+        backgroundColor: "rgba(74, 222, 128, 0.1)", // Light green fill
+        tension: 0.4, // Smooth curve
+        fill: true,
+        pointBorderColor: "#4ade80",
+        pointBackgroundColor: "#4ade80",
         pointHoverRadius: 6,
-        pointRadius: 4,
-        pointHoverBackgroundColor: "#16a34a",
+        pointRadius: 5,
+        pointHoverBackgroundColor: "#34d399",
+        pointBorderWidth: 2,
       },
     ],
   };
@@ -93,13 +96,15 @@ const SpendingChart = () => {
     scales: {
       x: {
         ticks: {
-          color: "#6b7280", // Tailwind gray-500
-          font: { size: 14 },
+          color: "#6b7280",
+          font: { size: 12, weight: '500' },
         },
         grid: { display: false },
+        border: { display: false },
       },
       y: {
-        display: false, // Hide Y-axis
+        display: false,
+        grid: { display: false },
       },
     },
     elements: {
@@ -109,8 +114,10 @@ const SpendingChart = () => {
   };
 
   return (
-    <div className="h-44">
-      <Line ref={chartRef} data={data} options={options} />
+    <div className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+      <div className="h-52">
+        <Line ref={chartRef} data={data} options={options} />
+      </div>
     </div>
   );
 };

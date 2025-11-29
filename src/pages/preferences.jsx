@@ -96,13 +96,13 @@ function Preferences() {
 
   return (
     <div className="flex flex-col min-h-screen p-4 items-center w-full max-w-xs mx-auto">
-      <h1 className="text-4xl font-bold mb-4 text-center text-green-500">
+      <h1 className="text-4xl font-bold mb-4 text-center text-green-400">
         Preferences
       </h1>
       <div className="w-full">
         {sortedDates.map((date) => (
           <div key={date} className="mb-6">
-            <h2 className="text-xl font-semibold mb-2 text-green-600">
+            <h2 className="text-xl font-semibold mb-2 text-green-400">
               {dayjs(date).format("MMMM D, YYYY")}
             </h2>
             <motion.div
@@ -151,7 +151,7 @@ function Preferences() {
           }}
           shape={SHAPE.pill}
           size={SIZE.large}
-          className="bg-green-500 text-white w-70 relative bottom-25"
+          className="bg-green-400 text-white w-70 relative bottom-25"
         >
           Add a New Preference
         </Button>
@@ -207,7 +207,7 @@ function Preferences() {
               onClick={addPreference}
               shape={SHAPE.pill}
               size={SIZE.compact}
-              className="bg-green-500 text-white flex-1 text-sm"
+              className="bg-green-400 text-white flex-1 text-sm"
             >
               Done
             </Button>

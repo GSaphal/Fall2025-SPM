@@ -88,47 +88,47 @@ const Wallet = ({ userEmail }) => {
   return (
     <div className="w-full mb-6">
       {/* Main Wallet Card */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-green-500 via-emerald-500 to-teal-500 rounded-2xl shadow-xl mb-4">
+      <div className="relative overflow-hidden bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 rounded-2xl shadow-sm border border-green-100/50 mb-4">
         {/* Decorative Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-white rounded-full -mr-32 -mt-32"></div>
-          <div className="absolute bottom-0 left-0 w-48 h-48 bg-white rounded-full -ml-24 -mb-24"></div>
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-green-200 rounded-full -mr-32 -mt-32"></div>
+          <div className="absolute bottom-0 left-0 w-48 h-48 bg-emerald-200 rounded-full -ml-24 -mb-24"></div>
         </div>
         
-        <div className="relative p-6 text-white">
+        <div className="relative p-6 text-gray-800">
           {/* Header */}
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-3">
-              <div className="bg-white/20 backdrop-blur-sm p-3 rounded-xl">
-                <FaWallet className="text-2xl" />
+              <div className="bg-gradient-to-br from-green-200 to-emerald-200 p-3 rounded-xl shadow-sm">
+                <FaWallet className="text-green-600 text-2xl" />
               </div>
               <div>
-                <h3 className="text-lg font-bold">Blockchain Wallet</h3>
-                <p className="text-sm text-white/80">Your digital wallet</p>
+                <h3 className="text-lg font-bold text-gray-800">Blockchain Wallet</h3>
+                <p className="text-sm text-gray-600">Your digital wallet</p>
               </div>
             </div>
-            <div className="bg-white/20 backdrop-blur-sm p-2 rounded-lg">
-              <FaQrcode className="text-xl" />
+            <div className="bg-gradient-to-br from-green-200 to-emerald-200 p-2 rounded-lg shadow-sm">
+              <FaQrcode className="text-green-600 text-xl" />
             </div>
           </div>
 
           {/* Wallet Address */}
           <div className="mb-6">
-            <p className="text-sm text-white/80 mb-2 font-medium">Wallet Address</p>
-            <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20">
+            <p className="text-sm text-gray-600 mb-2 font-medium">Wallet Address</p>
+            <div className="bg-white rounded-xl p-4 border border-gray-200 shadow-sm">
               <div className="flex items-center justify-between gap-3">
-                <code className="text-white font-mono text-sm flex-1 break-all">
+                <code className="text-gray-800 font-mono text-sm flex-1 break-all">
                   {walletAddress ? formatWalletAddress(walletAddress) : '0x0000...0000'}
                 </code>
                 <button
                   onClick={handleCopyAddress}
-                  className="flex-shrink-0 bg-white/20 hover:bg-white/30 transition-colors p-2 rounded-lg active:scale-95"
+                  className="flex-shrink-0 bg-green-100 hover:bg-green-200 transition-colors p-2 rounded-lg active:scale-95"
                   title="Copy address"
                 >
                   {copied ? (
-                    <FaCheck className="text-green-200 text-lg" />
+                    <FaCheck className="text-green-600 text-lg" />
                   ) : (
-                    <FaCopy className="text-white/90 text-lg" />
+                    <FaCopy className="text-green-600 text-lg" />
                   )}
                 </button>
               </div>
@@ -136,22 +136,22 @@ const Wallet = ({ userEmail }) => {
           </div>
 
           {/* Rewards Points */}
-          <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20">
+          <div className="bg-white rounded-xl p-4 border border-gray-200 shadow-sm">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="bg-gradient-to-br from-yellow-400 to-orange-500 p-2.5 rounded-lg">
-                  <FaCoins className="text-white text-lg" />
+                <div className="bg-gradient-to-br from-yellow-200 to-orange-200 p-2.5 rounded-lg">
+                  <FaCoins className="text-yellow-600 text-lg" />
                 </div>
                 <div>
-                  <p className="text-sm text-white/80 font-medium">Rewards Points</p>
-                  <p className="text-2xl font-bold text-white">
+                  <p className="text-sm text-gray-600 font-medium">Rewards Points</p>
+                  <p className="text-2xl font-bold text-gray-800">
                     {(rewardsPoints || 1250).toLocaleString()}
                   </p>
                 </div>
               </div>
               <div className="text-right">
-                <div className="bg-green-600/40 px-3 py-1 rounded-full border border-white/20">
-                  <span className="text-xs font-semibold text-white">Active</span>
+                <div className="bg-green-100 px-3 py-1 rounded-full border border-green-200">
+                  <span className="text-xs font-semibold text-green-600">Active</span>
                 </div>
               </div>
             </div>
@@ -160,16 +160,16 @@ const Wallet = ({ userEmail }) => {
       </div>
 
       {/* Info Banner */}
-      <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-xl p-4">
+      <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-xl p-4 shadow-sm">
         <div className="flex items-start gap-3">
-          <div className="bg-green-500 p-2 rounded-lg flex-shrink-0 mt-0.5">
-            <FaCoins className="text-white text-sm" />
+          <div className="bg-gradient-to-br from-green-200 to-emerald-200 p-2 rounded-lg flex-shrink-0 mt-0.5 shadow-sm">
+            <FaCoins className="text-green-600 text-sm" />
           </div>
           <div className="flex-1">
-            <p className="text-sm font-semibold text-green-900 mb-1">
+            <p className="text-sm font-semibold text-green-600 mb-1">
               Earn More Points
             </p>
-            <p className="text-xs text-green-700">
+            <p className="text-xs text-gray-600">
               Scan receipts and make purchases to accumulate rewards points that can be redeemed for exclusive benefits.
             </p>
           </div>

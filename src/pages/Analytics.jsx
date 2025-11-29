@@ -13,6 +13,7 @@ import withLayout from "../components/Layout";
 import React from "react";
 import { MdArrowDownward, MdArrowUpward } from "react-icons/md";
 import { HeadingMedium } from "baseui/typography";
+import TransactionCategories from "../components/TransactionCategories";
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -112,7 +113,7 @@ const AnalysisPage = () => {
           {priceComparisons.map((item, index) => (
             <div
               key={index}
-              className="flex justify-between items-center p-2  rounded-lg shadow-sm"
+              className="flex justify-between items-center p-3 bg-white rounded-lg shadow-sm border border-green-100 hover:border-green-300 transition-colors"
             >
               <div>
                 <p className="font-medium">{item.item}</p>
@@ -122,7 +123,7 @@ const AnalysisPage = () => {
                 <p className="text-sm line-through text-red-500">
                   ${item.actual.toFixed(2)}
                 </p>
-                <p className="text-lg font-semibold text-green-500">
+                <p className="text-lg font-semibold text-green-400">
                   ${item.efficient.toFixed(2)}
                 </p>
               </div>
@@ -133,7 +134,7 @@ const AnalysisPage = () => {
       <HeadingMedium>Recommended for you</HeadingMedium>
 
       {/* Comparison Table */}
-      <div className="rounded-2xl shadow-md p-2 mt-4">
+      <div className="rounded-2xl shadow-md p-4 mt-4 bg-white border border-green-100">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b">
@@ -150,13 +151,13 @@ const AnalysisPage = () => {
                 <td className="text-right p-2 text-red-500">
                   ${item.actual.toFixed(2)}
                 </td>
-                <td className="text-right p-2 text-green-500">
+                <td className="text-right p-2 text-green-400">
                   ${item.efficient.toFixed(2)}
                 </td>
                 <td className="text-center p-2">
                   {item.actual > item.efficient ? (
                     <MdArrowUpward
-                      className="text-green-500 inline-block"
+                      className="text-green-400 inline-block"
                       size={16}
                     />
                   ) : (
@@ -178,6 +179,10 @@ const AnalysisPage = () => {
           <Bar data={rewardsData} options={{ responsive: true }} />
         </div>
       </div>
+      
+      {/* Transaction Categories */}
+      <TransactionCategories />
+      
       <div className="h-10 w-10"></div>
     </div>
   );
