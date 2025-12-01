@@ -5,20 +5,38 @@ import { MdCamera } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { ANCHOR, Drawer } from "baseui/drawer";
 import ReceiptForm from "../components/Receipt";
+import ReceiptScanned from "../components/ReceiptScanned";
 
 const Camera = () => {
   const [imageData, setImageData] = useState(null);
+  const [showReceiptScanned, setShowReceiptScanned] = useState(false);
+  const [scannedImage, setScannedImage] = useState(null);
+  const [receiptAmount, setReceiptAmount] = useState(0);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
 
   const startCamera = async () => {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      // Request back camera (environment) instead of front camera (user)
+      const stream = await navigator.mediaDevices.getUserMedia({ 
+        video: { 
+          facingMode: 'environment' // 'environment' = back camera, 'user' = front camera
+        } 
+      });
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
       }
     } catch (error) {
       console.error("Error accessing the camera: ", error);
+      // Fallback to any available camera if back camera is not available
+      try {
+        const fallbackStream = await navigator.mediaDevices.getUserMedia({ video: true });
+        if (videoRef.current) {
+          videoRef.current.srcObject = fallbackStream;
+        }
+      } catch (fallbackError) {
+        console.error("Error accessing fallback camera: ", fallbackError);
+      }
     }
   };
   const navigate = useNavigate();
@@ -32,10 +50,36 @@ const Camera = () => {
     // Process the image data here
     console.log("Processing image data: ", imageData);
 
+    // Generate a random receipt amount between $10 and $150
+    const receiptAmount = (Math.random() * 140 + 10).toFixed(2);
+
     setTimeout(() => {
-      setIsOpen(true);
+      // Show receipt scanned page instead of drawer
+      setScannedImage(imageData);
+      setReceiptAmount(parseFloat(receiptAmount));
+      setShowReceiptScanned(true);
       setImageData(null);
     }, 2000);
+  };
+
+  const handleReceiptComplete = (pointsEarned, receiptAmount) => {
+    // Update points and total spending in localStorage
+    console.log("Points earned:", pointsEarned);
+    console.log("Receipt amount:", receiptAmount);
+    
+    // Update total spending
+    const currentSpending = parseFloat(localStorage.getItem('totalSpending') || '2450');
+    const newSpending = currentSpending + receiptAmount;
+    localStorage.setItem('totalSpending', newSpending.toString());
+    
+    // Update rewards points
+    const currentPoints = parseInt(localStorage.getItem('rewardsPoints') || '1250');
+    const newPoints = currentPoints + pointsEarned;
+    localStorage.setItem('rewardsPoints', newPoints.toString());
+    
+    setShowReceiptScanned(false);
+    setScannedImage(null);
+    setReceiptAmount(0);
   };
   const captureImage = () => {
     const video = videoRef.current;
@@ -54,6 +98,17 @@ const Camera = () => {
       video.srcObject.getTracks().forEach((track) => track.stop());
     }
   };
+
+  // Show ReceiptScanned page if scanning is complete
+  if (showReceiptScanned) {
+    return (
+      <ReceiptScanned
+        receiptImage={scannedImage}
+        receiptAmount={receiptAmount}
+        onComplete={handleReceiptComplete}
+      />
+    );
+  }
 
   return (
     <div className="relative max-w-sm mx-auto">

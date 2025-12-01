@@ -116,7 +116,7 @@ const SpendingChart = () => {
   return (
     <div className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
       <div className="h-52">
-        <Line ref={chartRef} data={data} options={options} />
+      <Line ref={chartRef} data={data} options={options} />
       </div>
     </div>
   );

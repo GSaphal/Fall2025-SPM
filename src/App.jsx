@@ -10,10 +10,12 @@ import Preferences from "./pages/preferences";
 import Analytics from "./pages/Analytics";
 import Random from "./pages/Random.jsx";
 import FlyerSearch from "./components/FlyerProcess";
+import ScrollToTop from "./components/ScrollToTop";
 
 const App = () => {
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         {/* Define routes for your pages */}
         <Route path="/" element={<Homepage />} />

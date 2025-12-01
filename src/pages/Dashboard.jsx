@@ -35,6 +35,7 @@ const Dashboard = () => {
   const user = JSON.parse(localStorage.getItem("user") || "{}");
   const userEmail = user?.email;
   const [rewardsPoints, setRewardsPoints] = useState(0);
+  const [totalSpending, setTotalSpending] = useState(2450);
 
   useEffect(() => {
     const fetchRewards = async () => {
@@ -44,12 +45,49 @@ const Dashboard = () => {
           setRewardsPoints(data.rewards_points || 0);
         } catch (error) {
           console.error("Error fetching rewards:", error);
-          // Use demo data if backend fails
-          setRewardsPoints(1250);
+          // Use localStorage or demo data if backend fails
+          const storedPoints = parseInt(localStorage.getItem('rewardsPoints') || '1250');
+          setRewardsPoints(storedPoints);
         }
+      } else {
+        // Use localStorage if no user email
+        const storedPoints = parseInt(localStorage.getItem('rewardsPoints') || '1250');
+        setRewardsPoints(storedPoints);
       }
     };
     fetchRewards();
+    
+    // Load total spending from localStorage
+    const storedSpending = parseFloat(localStorage.getItem('totalSpending') || '2450');
+    setTotalSpending(storedSpending);
+    
+    // Listen for storage changes (when receipt is scanned)
+    const handleStorageChange = () => {
+      const updatedSpending = parseFloat(localStorage.getItem('totalSpending') || '2450');
+      const updatedPoints = parseInt(localStorage.getItem('rewardsPoints') || '1250');
+      setTotalSpending(updatedSpending);
+      setRewardsPoints(updatedPoints);
+    };
+    
+    window.addEventListener('storage', handleStorageChange);
+    // Also check periodically for updates (since storage event only fires in other tabs)
+    const interval = setInterval(() => {
+      const updatedSpending = parseFloat(localStorage.getItem('totalSpending') || '2450');
+      const updatedPoints = parseInt(localStorage.getItem('rewardsPoints') || '1250');
+      setTotalSpending((prev) => {
+        if (prev !== updatedSpending) return updatedSpending;
+        return prev;
+      });
+      setRewardsPoints((prev) => {
+        if (prev !== updatedPoints) return updatedPoints;
+        return prev;
+      });
+    }, 500);
+    
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      clearInterval(interval);
+    };
   }, [userEmail]);
 
   return (
@@ -60,7 +98,9 @@ const Dashboard = () => {
           <HiOutlineRectangleStack className="text-gray-500" size={18} />
           <ParagraphSmall className="text-gray-600">You've spent</ParagraphSmall>
         </div>
-        <HeadingXXLarge className="text-gray-900 font-bold mb-3">$2,450</HeadingXXLarge>
+        <HeadingXXLarge className="text-gray-900 font-bold mb-3">
+          ${totalSpending.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+        </HeadingXXLarge>
         <div className="w-full">
           <div className="bg-gray-100 rounded-lg px-3 py-2">
             <p className="text-sm text-gray-700 font-medium">
