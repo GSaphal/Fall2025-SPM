@@ -69,9 +69,22 @@ const ReceiptScanned = ({ receiptImage, receiptAmount = 0, onComplete }) => {
   useEffect(() => {
     if (phase === 'points') {
       // Phase 2: Calculate points based on receipt amount
-      // Formula: 1 point per dollar spent, minimum 10 points, bonus for larger amounts
-      const basePoints = Math.max(10, Math.floor(receiptTotal)); // At least 10 points, 1 point per dollar
-      const bonusPoints = receiptTotal > 50 ? Math.floor((receiptTotal - 50) * 0.5) : 0; // Bonus for receipts over $50
+      // Formula based on Dollarama receipt example ($27.25):
+      // - Base: 1 point per dollar (rounded down)
+      // - Minimum: 5 points for any receipt
+      // - Bonus tiers:
+      //   - $20-$40: +5 bonus points
+      //   - $40-$60: +10 bonus points
+      //   - $60+: +15 bonus points
+      const basePoints = Math.max(5, Math.floor(receiptTotal)); // At least 5 points, 1 point per dollar
+      let bonusPoints = 0;
+      if (receiptTotal >= 60) {
+        bonusPoints = 15;
+      } else if (receiptTotal >= 40) {
+        bonusPoints = 10;
+      } else if (receiptTotal >= 20) {
+        bonusPoints = 5;
+      }
       const receiptPoints = basePoints + bonusPoints;
       const total = receiptPoints;
       setTotalPoints(total);

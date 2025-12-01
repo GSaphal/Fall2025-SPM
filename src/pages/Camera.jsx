@@ -50,8 +50,20 @@ const Camera = () => {
     // Process the image data here
     console.log("Processing image data: ", imageData);
 
-    // Generate a random receipt amount between $10 and $150
-    const receiptAmount = (Math.random() * 140 + 10).toFixed(2);
+    // Generate a realistic receipt amount (similar to Dollarama receipt: $27.25)
+    // Range: $5 to $100, with most receipts between $10-$50
+    const random = Math.random();
+    let receiptAmount;
+    if (random < 0.3) {
+      // 30% chance: Small receipts ($5-$15)
+      receiptAmount = (Math.random() * 10 + 5).toFixed(2);
+    } else if (random < 0.7) {
+      // 40% chance: Medium receipts ($15-$40) - most common
+      receiptAmount = (Math.random() * 25 + 15).toFixed(2);
+    } else {
+      // 30% chance: Large receipts ($40-$100)
+      receiptAmount = (Math.random() * 60 + 40).toFixed(2);
+    }
 
     setTimeout(() => {
       // Show receipt scanned page instead of drawer
