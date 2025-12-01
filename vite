@@ -1,0 +1,9 @@
+
+
+  VITE v6.0.11  ready in 755 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+12:25:30 PM [vite] (client) hmr update /src/pages/Camera.jsx
+12:25:41 PM [vite] (client) hmr update /src/pages/Camera.jsx (x2)clear
